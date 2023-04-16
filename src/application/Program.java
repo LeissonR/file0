@@ -23,8 +23,8 @@ public class Program {
 
 		System.out.print("Enter a file path: ");
 		String strPath = sc.nextLine();
-
 		File path = new File(strPath);
+		String strPath2 = path.getParent() + "\\";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -49,18 +49,12 @@ public class Program {
 		System.out.print("Enter the new folder: ");
 		String newFolder = sc.nextLine();
 
-		String strPath2 = path.getParent() + "\\";
-
 		boolean success = new File(strPath2 + newFolder).mkdir();
 
 		System.out.print("Enter the new File: ");
-
 		String strPath3 = strPath2 + newFolder + "\\" + sc.nextLine();
 
-		System.out.println(strPath3);
-		File newPath = new File(strPath3);
-
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(newPath))) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(strPath3))) {
 
 			for (Product lines : list) {
 				bw.write(lines.toString());
@@ -69,5 +63,7 @@ public class Program {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		sc.close();
 	}
 }
